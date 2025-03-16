@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #3d837b;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #b6dde0;
+    padding: 15px 30px;
+}
+
+.logo img {
+    height: 50px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 50px;
+}
+
+.contact-info, .contact-form {
+    background-color: #e3d3c1;
+    padding: 20px;
+    border-radius: 5px;
+    width: 40%;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info h2 {
+    color: #a35540;
+}
+
+.contact-info p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #5a3b2e;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.contact-form button {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #a35540;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #8c4030;
+}
+
+    </style>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="./image/logo.jpeg" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="f1.html">Home</a></li>
+                <li><a href="f3.html">Project</a></li>
+                <li><a href="f4.html">Event</a></li>
+                <li><a href="f5.html">Get Involved</a></li>
+                <li><a href="f6.html">Blog</a></li>
+                <li><a href="f2.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact-info">
+            <h2>Contact Us</h2>
+            <p>We'd love to hear from you! Whether you have questions, want to join a project, or collaborate with us, feel free to reach out.</p>
+            <p>📍 <strong>Our Address</strong><br>
+                123 Green Earth Street, Eco City, Sustainable State, 45678</p>
+            <p>📧 <strong>Email:</strong> support@communityeco.org</p>
+            <p>📞 <strong>Phone:</strong> +1 (123) 456-7890</p>
+            <p>🔗 <strong>Follow Us:</strong> <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a> | <a href="#">LinkedIn</a></p>
+        </section>
+
+        <section class="contact-form">
+            <form action="#" method="post">
+                <label for="name">Name :</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message :</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+</body>
+</html>
