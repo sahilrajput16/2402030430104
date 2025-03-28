@@ -1,55 +1,75 @@
-def print_board(board):
-    for row in board:
-        print(" | ".join(row))
-        print("-" * 9)
+import tkinter as tk
+from tkinter import messagebox
+import time
 
-def check_winner(board, player):
-    # Check rows and columns
-    for i in range(3):
-        if all(board[i][j] == player for j in range(3)) or all(board[j][i] == player for j in range(3)):
+def check_winner():
+    for row in range(3):
+        if board[row][0]['text'] == board[row][1]['text'] == board[row][2]['text'] != "":    
+            highlight_winner(board[row][0], board[row][1], board[row][2])
             return True
-
-    # Check diagonals
-    if all(board[i][i] == player for i in range(3)) or all(board[i][2 - i] == player for i in range(3)):
+    
+    for col in range(3):
+        if board[0][col]['text'] == board[1][col]['text'] == board[2][col]['text'] != "":
+            highlight_winner(board[0][col], board[1][col], board[2][col])
+            return True
+    
+    if board[0][0]['text'] == board[1][1]['text'] == board[2][2]['text'] != "":
+        highlight_winner(board[0][0], board[1][1], board[2][2])
+        return True
+    
+    if board[0][2]['text'] == board[1][1]['text'] == board[2][0]['text'] != "":
+        highlight_winner(board[0][2], board[1][1], board[2][0])
         return True
     
     return False
 
-def is_full(board):
-    return all(board[i][j] != " " for i in range(3) for j in range(3))
+def highlight_winner(*cells):
+    for _ in range(5):
+        for cell in cells:
+            cell.config(bg='lightgreen')
+        root.update()
+        time.sleep(0.2)
+        for cell in cells:
+            cell.config(bg='white')
+        root.update()
+        time.sleep(0.2)
+    for cell in cells:
+        cell.config(bg='lightgreen')
+    messagebox.showinfo("Tic Tac Toe", f"Player {turn} wins!")
+    root.quit()
 
-def main():
-    board = [[" " for _ in range(3)] for _ in range(3)]
-    players = ["X", "O"]
-    turn = 0
+def on_click(row, col):
+    global turn
+    if board[row][col]['text'] == "" and not check_winner():
+        board[row][col]['text'] = turn
+        board[row][col].config(fg="blue" if turn == "X" else "red")
+        animate_button(board[row][col])
+        if check_winner():
+            return
+        turn = "O" if turn == "X" else "X"
+        
+def animate_button(button):
+    for _ in range(5):
+        button.config(bg='yellow')
+        root.update()
+        time.sleep(0.1)
+        button.config(bg='white')
+        root.update()
+        time.sleep(0.1)
 
-    while True:
-        print_board(board)
-        player = players[turn % 2]
-        print(f"Player {player}'s turn.")
+def create_board():
+    for r in range(3):
+        row = []
+        for c in range(3):
+            button = tk.Button(root, text="", font=('Arial', 24), height=2, width=5,
+                               command=lambda r=r, c=c: on_click(r, c))
+            button.grid(row=r, column=c)
+            row.append(button)
+        board.append(row)
 
-        try:
-            row, col = map(int, input("Enter row and column (0-2, separated by space): ").split())
-            if board[row][col] != " ":
-                print("This position is already taken. Try again.")
-                continue
-        except (ValueError, IndexError):
-            print("Invalid input. Enter two numbers between 0 and 2.")
-            continue
-
-        board[row][col] = player
-
-        if check_winner(board, player):
-            print_board(board)
-            print(f"Player {player} wins!")
-            break
-
-        if is_full(board):
-            print_board(board)
-            print("It's a tie!")
-            break
-
-        turn += 1
-
-if __name__ == "__main__":
-    main()
+root = tk.Tk()
+root.title("Tic Tac Toe")
+turn = "X"
+board = []
+create_board()
+root.mainloop()
